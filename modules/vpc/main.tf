@@ -11,7 +11,7 @@ resource "aws_subnet" "public_subnets" {
   cidr_block = var.public_subnets[count.index]
   availability_zone = var.azs[count.index]
   tags = {
-    Name = "public-subnets-${count.index}"
+    Name = "public-subnets-${count.index+1}"
   }
 }
 
@@ -21,6 +21,6 @@ resource "aws_subnet" "private_subnets" {
   cidr_block = var.private_subnets[count.index]
   availability_zone = var.azs[count.index]
   tags = {
-    Name = "private-subnets-${count.index}"
+    Name = "private-subnets-${count.index+1}"
   }
 }
