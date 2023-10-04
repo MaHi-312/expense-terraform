@@ -1,5 +1,5 @@
 #!/bin/bash
 
-dnf install python3.11-pip -y  | tee -a /opt/userdata.log
+dnf install python3.11-pip -Y  | tee -a /opt/userdata.log
 pip3.11 install boto3 botocore  | tee -a /opt/userdata.log
 ansible-pull -i localhost, -U https://github.com/MaHi-312/infra-ansible main.yml -e role_name=${role_name}f  | tee -a /opt/userdata.log
