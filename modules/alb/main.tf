@@ -65,7 +65,7 @@ resource "aws_lb_listener" "listener-https" {
  count = var.alb-type == "public" ? 1 : 0
   load_balancer_arn = aws_lb.alb.arn
   port              = "443"
-  protocol          = "HTTPs"
+  protocol          = "HTTPS"
   ssl_policy = "ELBSecurityPolicy-2016-08"
   certificate_arn = "arn:aws:acm:us-east-1:308315242387:certificate/4d8b28b6-b87c-46ef-9ea9-c8ffe1f409f7"
 
