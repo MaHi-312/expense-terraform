@@ -9,7 +9,14 @@ resource "aws_security_group" "security-group" {
     to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = [var.alb_sg_allow_cidr]
+  }
 
+  ingress {
+    description      = "HTTPS"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = [var.alb_sg_allow_cidr]
   }
 
   egress {
@@ -17,7 +24,6 @@ resource "aws_security_group" "security-group" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
-
   }
 
   tags = {
@@ -48,6 +54,20 @@ resource "aws_lb_listener" "listener-http" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "80"
   protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = var.tg_arn
+  }
+}
+
+resource "aws_lb_listener" "listener-https" {
+ count = var.alb-type == "public" ? 1 : 0
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "443"
+  protocol          = "HTTPs"
+  ssl_policy = "ELBSecurityPolicy-2016-08"
+  certificate_arn = "arn:aws:acm:us-east-1:308315242387:certificate/4d8b28b6-b87c-46ef-9ea9-c8ffe1f409f7"
 
   default_action {
     type             = "forward"
