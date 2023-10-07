@@ -4,6 +4,8 @@ resource "aws_vpc" "main" {
   tags = {
     Name = "${var.env}-vpc"
   }
+}
+resource "aws_default_vpc" "default" {
   force_destroy = true
 }
 
