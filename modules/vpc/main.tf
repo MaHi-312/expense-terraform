@@ -4,6 +4,7 @@ resource "aws_vpc" "main" {
   tags = {
     Name = "${var.env}-vpc"
   }
+  force_destroy = true
 }
 
 resource "aws_subnet" "public_subnets" {
