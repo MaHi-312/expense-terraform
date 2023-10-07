@@ -5,9 +5,6 @@ resource "aws_vpc" "main" {
     Name = "${var.env}-vpc"
   }
 }
-resource "aws_default_vpc" "default" {
-  force_destroy = true
-}
 
 resource "aws_subnet" "public_subnets" {
   count = length(var.public_subnets)
