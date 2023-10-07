@@ -1,6 +1,6 @@
 resource "aws_vpc" "main" {
   cidr_block = var.vpc_cidr
-  force_destroy = true
+
   tags = {
     Name = "${var.env}-vpc"
   }
