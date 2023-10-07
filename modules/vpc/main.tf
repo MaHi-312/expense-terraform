@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
     Name = "${var.env}-vpc"
   }
 }
-resource "aws_vpc" "main" {
+resource "aws_default_vpc" "default" {
   force_destroy = true
 }
 
